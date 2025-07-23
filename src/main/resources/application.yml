@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: app-route
+              uri: ${APP_SERVICE_URL:http://localhost:9000}
+              predicates:
+                - Path=/v1/**
+    config:
+      uri: http://localhost:8888
+  application:
+    name: edge-service
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+
