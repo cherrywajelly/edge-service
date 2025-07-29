@@ -1,17 +1,21 @@
 spring:
+  config:
+    import:
+      - optional:file:.env[.properties]
+
   cloud:
     gateway:
-      server:
-        webmvc:
-          routes:
-            - id: app-route
-              uri: ${APP_SERVICE_URL:http://localhost:9000}
-              predicates:
-                - Path=/v1/**
-    config:
-      uri: http://localhost:8888
+      routes:
+        - id: app-route
+          uri: ${APP_SERVICE_URL:http://localhost:9000}
+          predicates:
+            - Path=/api/v1/**
   application:
     name: edge-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
 
+  jwt:
+    key: ${JWT_KEY}
+    access_exp_time: ${JWT_ACCESS_EXP_TIME}
+    refresh_exp_time: ${JWT_REFRESH_EXP_TIME}
