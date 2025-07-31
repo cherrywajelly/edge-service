@@ -19,3 +19,15 @@ spring:
     key: ${JWT_KEY}
     access_exp_time: ${JWT_ACCESS_EXP_TIME}
     refresh_exp_time: ${JWT_REFRESH_EXP_TIME}
+
+security:
+  whitelist:
+    paths:
+      - ${LOGIN_URL}
+      - ${REFRESH_URL}
+      - ${H2_CONSOLE_URL}
+      - ${ACTUATOR_URL}
+      - ${API_SWAGGER_URL}
+      - ${API_V3_DOCS_URL}
+      - ${SWAGGER_URL}
+      - ${API_DOCS_URL}
