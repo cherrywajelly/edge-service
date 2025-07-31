@@ -50,7 +50,6 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         try {
             Claims claims = jwtUtil.validateToken(token);
             String json = claims.getSubject();
-            System.out.println(json);
             LoginMember member = objectMapper.readValue(json, LoginMember.class);
 
             ServerWebExchange modified = exchange.mutate()
