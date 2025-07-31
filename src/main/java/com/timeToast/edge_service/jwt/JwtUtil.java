@@ -14,7 +14,6 @@ import java.util.Base64;
 @Component
 public class JwtUtil {
 
-
     private final String jwtKey;
 
 

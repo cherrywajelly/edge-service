@@ -36,10 +36,9 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
 
-        if (routeValidator.isSecured.test(request)) {
+        if (!routeValidator.isSecured.test(request)) {
             return chain.filter(exchange);
         }
-
         String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -48,10 +47,10 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         }
 
         String token = authHeader.substring(7); // "Bearer " 제거
-
         try {
             Claims claims = jwtUtil.validateToken(token);
             String json = claims.getSubject();
+            System.out.println(json);
             LoginMember member = objectMapper.readValue(json, LoginMember.class);
 
             ServerWebExchange modified = exchange.mutate()
