@@ -5,11 +5,13 @@ spring:
 
   cloud:
     gateway:
-      routes:
-        - id: app-route
-          uri: ${APP_SERVICE_URL}
-          predicates:
-            - Path=${APP_PATH_URL}
+      server:
+        webflux:
+          routes:
+            - id: app-route
+              uri: ${APP_SERVICE_URL}
+              predicates:
+                - Path=${APP_PATH_URL}
   application:
     name: edge-service
   lifecycle:

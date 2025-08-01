@@ -1,4 +1,4 @@
-package com.timeToast.edge_service.global;
+package com.timeToast.edge_service.config;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.timeToast.edge_service.filter;
+package com.timeToast.edge_service.util;
 
-import com.timeToast.edge_service.global.WhitelistProperties;
+import com.timeToast.edge_service.config.WhitelistProperties;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;

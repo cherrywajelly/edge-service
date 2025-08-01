@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.timeToast.edge_service.jwt.JwtUtil;
 import com.timeToast.edge_service.jwt.LoginMember;
+import com.timeToast.edge_service.util.RouteValidator;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;

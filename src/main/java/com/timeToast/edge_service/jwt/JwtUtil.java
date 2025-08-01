@@ -16,11 +16,9 @@ public class JwtUtil {
 
     private final String jwtKey;
 
-
     public JwtUtil(@Value("${spring.jwt.key}") String jwtKey) {
         this.jwtKey = jwtKey;
     }
-
 
     public Claims validateToken(String token) throws JwtException {
         SecretKey tokenKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(jwtKey));
