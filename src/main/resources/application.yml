@@ -1,17 +1,38 @@
 spring:
+  application:
+    name: edge-service
+
   cloud:
     gateway:
       server:
-        webmvc:
+        webflux:
           routes:
-            - id: app-route
-              uri: ${APP_SERVICE_URL:http://localhost:9000}
+            - id: app-route-v1
+              uri: ${APP_SERVICE_URL}
               predicates:
-                - Path=/v1/**
-    config:
-      uri: http://localhost:8888
-  application:
-    name: edge-service
+                - Path=${APP_v1_PATH_URL}
+            - id: app-route-v2
+              uri: ${APP_SERVICE_URL}
+              predicates:
+                - Path=${APP_v2_PATH_URL}
+            - id: app-route-v3
+              uri: ${APP_SERVICE_URL}
+              predicates:
+                - Path=${APP_v3_PATH_URL}
   lifecycle:
     timeout-per-shutdown-phase: 15s
 
+  jwt:
+    key: ${JWT_KEY}
+
+security:
+  whitelist:
+    paths:
+      - ${LOGIN_URL}
+      - ${REFRESH_URL}
+      - ${H2_CONSOLE_URL}
+      - ${ACTUATOR_URL}
+      - ${API_SWAGGER_URL}
+      - ${API_V3_DOCS_URL}
+      - ${SWAGGER_URL}
+      - ${API_DOCS_URL}
