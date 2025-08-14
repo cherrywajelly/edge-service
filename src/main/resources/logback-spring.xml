@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- Spring Property 참조 -->
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="env" source="spring.profiles.active"/>
+
+    <!-- 콘솔 텍스트 로그 패턴 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%highlight(%level)] [%X{traceId:-}] [%X{userId:-}] [%thread] %cyan(${springAppName}) %logger{36} - %msg%n"/>
+
+    <!-- Appender 1:  콘솔 로그 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender 2: JSON 로그  -->
+<!--    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--            &lt;!&ndash; 앱 이름, 환경 등 공통 필드 &ndash;&gt;-->
+<!--            <customFields>-->
+<!--                {-->
+<!--                "app_name": "${springAppName}",-->
+<!--                "env": "${env}"-->
+<!--                }-->
+<!--            </customFields>-->
+
+<!--            <includeMdcKeyName>traceId</includeMdcKeyName>-->
+<!--            <includeMdcKeyName>userId</includeMdcKeyName>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+    <!-- 로그 레벨별 출력 지정 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+<!--        <appender-ref ref="JSON"/>-->
+    </root>
+
+</configuration>

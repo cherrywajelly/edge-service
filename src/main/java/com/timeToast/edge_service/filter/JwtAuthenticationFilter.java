@@ -9,6 +9,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -60,7 +61,8 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
                     }))
                     .build();
 
-            log.info("login: {}",member.id());
+            MDC.put("userId", member.id());
+            log.info("Authentication Success");
             return chain.filter(modified);
 
         } catch (JwtException e) {
